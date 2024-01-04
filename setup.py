@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'jad=JustAnotherDiffer.JAD:entry',
+            'JAD=JustAnotherDiffer.JAD:entry',
         ],
     },
 )
