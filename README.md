@@ -7,6 +7,8 @@
 <div align="center">
 
 ![GitHub contributors](https://img.shields.io/github/contributors/user1342/Just-Another-Differ)
+![GitHub Repo stars](https://img.shields.io/github/stars/user1342/Just-Another-Differ?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/user1342/Just-Another-Differ?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/user1342/Just-Another-Differ)
 <br>
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P7C2MM6)
@@ -18,6 +20,8 @@ Just Another Differ (JAD) is a command-line tool for comparing two binary files.
 * **🔬 Function Finding:** JAD will produce an output map of function similarities between two binaries.
 * **🌐 Outputs:** JAD can produce a text, HTML, or stdout output for the mapping it produces.
 * **🛠️ Ghidra Enabled:** JAD uses Ghidra headless to enable decompilation of functions!
+
+JAD was inspired by anouther tool I created for the same purpose for Android APKs, see [Obfu-DE-Scate](https://github.com/user1342/Obfu-DE-Scate)!
 
 # ⚙️ Setup
 
