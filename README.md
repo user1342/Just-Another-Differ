@@ -16,7 +16,7 @@
 Just Another Differ (JAD) is a command-line tool for comparing two binary files. It uses fuzzy string matching and Ghidra's decompilation to analyze function similarities between binaries. A great example of using JAD is when reviewing a newer version of a binary that has stripped or obfuscated function names compared to an older version which does not - JAD will produce a map of the functions in the new binary that are the closest in similarity to the old binary.
 
 * **🔬 Function Finding:** JAD will produce an output map of function similarities between two binaries.
-* * **🌐 Outputs:** JAD can produce a text, HTML, or stdout output for the mapping it produces.
+* **🌐 Outputs:** JAD can produce a text, HTML, or stdout output for the mapping it produces.
 * **🛠️ Ghidra Enabled:** JAD uses Ghidra headless to enable decompilation of functions!
 
 # ⚙️ Setup
