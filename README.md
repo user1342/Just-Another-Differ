@@ -39,7 +39,6 @@ JAD usage can be seen below:
 ```bash
 usage: JAD.py [-h] --binary-one BINARY_ONE --binary-two BINARY_TWO
               [--text-output TEXT_OUTPUT | --html-output HTML_OUTPUT]
-JAD.py: error: the following arguments are required: --binary-one/-b1, --binary-two/-b2
 ```
 
 # 🙏 Contributions
