@@ -21,7 +21,7 @@ Just Another Differ (JAD) is a command-line tool for comparing two binary files.
 * **🌐 Outputs:** JAD can produce a text, HTML, or stdout output for the mapping it produces.
 * **🛠️ Ghidra Enabled:** JAD uses Ghidra headless to enable decompilation of functions!
 
-JAD was inspired by anouther tool I created for the same purpose for Android APKs, see [Obfu-DE-Scate](https://github.com/user1342/Obfu-DE-Scate)!
+JAD was inspired by anouther tool I created with the same purpose for Android APKs, see [Obfu-DE-Scate](https://github.com/user1342/Obfu-DE-Scate)!
 
 # ⚙️ Setup
 
