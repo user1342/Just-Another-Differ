@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'tweezer=JustAnotherDiffer.JAD:entry',
+            'jad=JustAnotherDiffer.JAD:entry',
         ],
     },
 )
