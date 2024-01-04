@@ -6,8 +6,8 @@
 
 <div align="center">
 
-![GitHub contributors](https://img.shields.io/github/contributors/user1342/Tweezer)
-![GitHub last commit](https://img.shields.io/github/last-commit/user1342/Tweezer)
+![GitHub contributors](https://img.shields.io/github/contributors/user1342/Just-Another-Differ)
+![GitHub last commit](https://img.shields.io/github/last-commit/user1342/Just-Another-Differ)
 <br>
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P7C2MM6)
 
@@ -24,7 +24,7 @@ Just Another Differ (JAD) is a command-line tool for comparing two binary files.
 ## Dependancies
 
 JAD requires [Ghidra](https://ghidra-sre.org/) to be installed, and for ```analyzeHeadless``` to be on your path. If
-it is not on your path Tweezer will request on run where the binary is located. To install all other dependencies use
+it is not on your path JAD will request on run where the binary is located. To install all other dependencies use
 the ```requirements.txt``` file, with:
 
 ```
