@@ -32,7 +32,15 @@ pip install -r requirements.txt
 ```
 
 ## Running
-JAD 
+JAD must be provided with both a base binary (```--binary-one/-b1```) and a comparison binary (```--binary-two/-b2```). In addition to this if an output option can be chosen between ```--text-output``` for a text file map or ```--html-output``` for a HTML file. If no output is chosen JAD will display the map to the terminal.
+
+JAD usage can be seen below:
+
+```bash
+usage: JAD.py [-h] --binary-one BINARY_ONE --binary-two BINARY_TWO
+              [--text-output TEXT_OUTPUT | --html-output HTML_OUTPUT]
+JAD.py: error: the following arguments are required: --binary-one/-b1, --binary-two/-b2
+```
 
 # 🙏 Contributions
 
