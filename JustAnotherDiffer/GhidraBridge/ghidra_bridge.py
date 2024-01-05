@@ -16,7 +16,7 @@ class GhidraBridge():
     def _execute_blocking_command(self, command_as_list):
         if command_as_list != None:
             print("Executing command: {}".format(command_as_list))
-            result = subprocess.run(command_as_list, capture_output=False, stdout=subprocess.PIPE)
+            result = subprocess.run(command_as_list, capture_output=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             return result
 
     def generate_ghidra_decom_script(self, path_to_save_decoms_to, file_to_save_script_to):

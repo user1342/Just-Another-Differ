@@ -5,10 +5,11 @@ import re
 import tempfile
 from pathlib import Path
 from pprint import pprint
-
+import json
 from jinja2 import Template
 from fuzzywuzzy import fuzz
 from tqdm import tqdm
+import webbrowser
 
 from GhidraBridge.ghidra_bridge import GhidraBridge
 
@@ -31,7 +32,7 @@ class differ():
 
         # Create a mutually exclusive group for --function and --binary
         group = parser.add_mutually_exclusive_group()
-        group.add_argument('--text-output', type=str, help='Path to a text file for a simple map output')
+        group.add_argument('--json-output', type=str, help='Path to a json file for a simple map output')
         group.add_argument('--html-output', type=str, help='Path to a html file for a html output')
 
         args = parser.parse_args()
@@ -100,6 +101,7 @@ class differ():
                 <li>
                     <h2 class="function-header" onclick="toggleCodeBlock('{{ function_name }}_content')">{{ function_name }} &rarr; {{ details.binary_two_name }}</h2>
                     <div id="{{ function_name }}_content" class="content">
+                        <p>Name: {{ details.comparison_binary_function_name }}%</p>
                         <p>Confidence: {{ details.confidence }}%</p>
                     </div>
                 </li>
@@ -145,21 +147,22 @@ class differ():
                     g_bridge.decompile_binaries_functions(binary_one_path, binary_one_decom_output)
                     g_bridge.decompile_binaries_functions(binary_two_path, binary_two_decom_output)
 
+                    paths_to_binary_one_functions = []
+                    for path in Path(binary_one_decom_output).iterdir():
+                        paths_to_binary_one_functions.append(path)
+
                     scores_for_function_one = {}
-                    for binary_one_function_file_path in tqdm(Path(binary_one_decom_output).iterdir(),desc="Iterating over decompiled binaries in '{}'".format(binary_one_path)):
+                    for binary_one_function_file_path in tqdm(paths_to_binary_one_functions,desc="Iterating over decompiled binaries in '{}'".format(binary_one_path)):
                         binary_one_name, binary_one_function_name, *binary_one_epoc = Path(binary_one_function_file_path).name.split("__")
                         binary_one_code = self._get_code_from_decom_file(binary_one_function_file_path)
 
-                        for binary_two_function_file_path in Path(binary_one_decom_output).iterdir():
+                        for binary_two_function_file_path in Path(binary_two_decom_output).iterdir():
                             binary_two_name, binary_two_function_name, *binary_two_epoc = Path(binary_two_function_file_path).name.split("__")
                             binary_two_code = self._get_code_from_decom_file(binary_two_function_file_path)
 
                             score = fuzz.ratio(binary_one_code, binary_two_code)
 
-                            if not binary_two_function_name in scores_for_function_one:
-                                scores_for_function_one = {binary_two_function_name: score}
-                            else:
-                                scores_for_function_one[binary_two_function_name] = score
+                            scores_for_function_one[binary_two_function_name] = score
 
                         highest_score = 0
                         highest_score_name = ""
@@ -169,20 +172,18 @@ class differ():
                                 highest_score_name = function_two_name
                                 highest_score = score
 
-                        dict_of_function_similarities[binary_one_name] = {"binary_two_name": highest_score_name, "confidence": highest_score}
+                        dict_of_function_similarities[binary_one_function_name] = {"comparison_binary_function_name": highest_score_name, "confidence": highest_score}
 
 
-        if args.text_output and not args.html_output:
-            string_output = ""
-            for function_one_name in dict_of_function_similarities:
-                binary_two_name = dict_of_function_similarities[function_one_name]["binary_two_name"]
-                string_output.join("\n{} -> {}".format(function_one_name, binary_two_name))
+        if args.json_output and not args.html_output:
+            with open(args.json_output, 'w') as file:
+                json.dump(dict_of_function_similarities, file, indent=4)
+            print("Json file dumped at '{}'".format(args.json_output))
 
-                with open(args.text_output, "w") as file:
-                    file.write(string_output)
-
-        elif args.html_output and not args.html_output:
+        elif args.html_output and not args.json_output:
             self.create_html_output(dict_of_function_similarities,args.html_output)
+            print("HTML file created at '{}'".format(args.html_output))
+            webbrowser.open_new_tab(args.html_output)
 
         else:
             pprint(dict_of_function_similarities)

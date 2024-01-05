@@ -7,11 +7,12 @@ setup(
     install_requires=[
         'fuzzywuzzy',
         'tqdm',
-        'jinja2'
+        'jinja2',
+        'python-Levenshtein'
     ],
     entry_points={
         'console_scripts': [
-            'JAD=JustAnotherDiffer.JAD:entry',
+            'jad=JustAnotherDiffer.JAD:entry',
         ],
     },
 )
