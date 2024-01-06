@@ -68,17 +68,18 @@ JAD.py -b1 "\armv7l-eabihf\7zr" -b2 "\armv8-aarch64\7zr" --json-output out.json
 ```
 {
     "FUN_000100f4": {
-        "binary_two_name": "thunk_FUN_2344becc",
-        "confidence": 14
+        "binary_two_name": "FUN_0047c3b0",
+        "confidence": 86
     },
     "FUN_00010100": {
-        "binary_two_name": "thunk_FUN_0047becc",
-        "confidence": 40
+        "binary_two_name": "FUN_00400168",
+        "confidence": 76
     },
     "FUN_00010124": {
-        "binary_two_name": "thunk_FUN_98576",
-        "confidence": 41
+        "binary_two_name": "FUN_00400304",
+        "confidence": 75
     },
+    "FUN_0001014c": {
 ...
 ```
 
