@@ -45,6 +45,21 @@ usage: JAD.py [-h] --binary-one BINARY_ONE --binary-two BINARY_TWO
               [--json-output JSON_OUTPUT | --html-output HTML_OUTPUT]
 ```
 
+## Example
+The below output was produced when running JAD against two differently compilled stripped versions of the 7z binary found in the [linux-static-binaries](https://github.com/polaco1782/linux-static-binaries) repository.
+
+```bash
+-b1 "\armv7l-eabihf\7zr" -b2 "\armv8-aarch64\7zr" --html-output out.html
+```
+
+<p align="center">
+    <img width=100% src="web-screenshot.png">
+  </a>
+</p>
+
+<div align="center">
+</div>
+
 # 🙏 Contributions
 
 JAD is an open-source project and welcomes contributions from the community. If you would like to contribute to
