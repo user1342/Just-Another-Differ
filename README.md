@@ -53,7 +53,7 @@ The below output was produced when running JAD against two differently compilled
 ```
 
 <p align="center">
-    <img width=100% src="web-screenshot.png">
+    <img width=50% src="screenshot.png">
   </a>
 </p>
 
