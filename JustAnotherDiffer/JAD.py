@@ -1,15 +1,16 @@
 # JAD - Just Another Differ
 
 import argparse
+import json
 import re
 import tempfile
+import webbrowser
 from pathlib import Path
 from pprint import pprint
-import json
-from jinja2 import Template
+
 from fuzzywuzzy import fuzz
+from jinja2 import Template
 from tqdm import tqdm
-import webbrowser
 
 from GhidraBridge.ghidra_bridge import GhidraBridge
 
@@ -27,8 +28,10 @@ class differ():
         parser = argparse.ArgumentParser(
             description='Command-line interface for Function Change Differ')
 
-        parser.add_argument('--binary-one', '-b1', required=True, type=str, help='Path to the base binary (i.e. binary 1)')
-        parser.add_argument('--binary-two', '-b2', required=True, type=str, help='Path to the secondary binary (i.e. binary 2)')
+        parser.add_argument('--binary-one', '-b1', required=True, type=str,
+                            help='Path to the base binary (i.e. binary 1)')
+        parser.add_argument('--binary-two', '-b2', required=True, type=str,
+                            help='Path to the secondary binary (i.e. binary 2)')
 
         # Create a mutually exclusive group for --function and --binary
         group = parser.add_mutually_exclusive_group()
@@ -111,7 +114,6 @@ class differ():
         </html>
         '''
 
-
         # Create Jinja2 template from the template string
         template = Template(template_str)
 
@@ -140,7 +142,6 @@ class differ():
             binary_one_path = args.binary_one
             binary_two_path = args.binary_two
 
-
             with tempfile.TemporaryDirectory() as binary_one_decom_output:
                 with tempfile.TemporaryDirectory() as binary_two_decom_output:
                     g_bridge = GhidraBridge()
@@ -152,12 +153,16 @@ class differ():
                         paths_to_binary_one_functions.append(path)
 
                     scores_for_function_one = {}
-                    for binary_one_function_file_path in tqdm(paths_to_binary_one_functions,desc="Iterating over decompiled binaries in '{}'".format(binary_one_path)):
-                        binary_one_name, binary_one_function_name, *binary_one_epoc = Path(binary_one_function_file_path).name.split("__")
+                    for binary_one_function_file_path in tqdm(paths_to_binary_one_functions,
+                                                              desc="Iterating over decompiled binaries in '{}'".format(
+                                                                      binary_one_path)):
+                        binary_one_name, binary_one_function_name, *binary_one_epoc = Path(
+                            binary_one_function_file_path).name.split("__")
                         binary_one_code = self._get_code_from_decom_file(binary_one_function_file_path)
 
                         for binary_two_function_file_path in Path(binary_two_decom_output).iterdir():
-                            binary_two_name, binary_two_function_name, *binary_two_epoc = Path(binary_two_function_file_path).name.split("__")
+                            binary_two_name, binary_two_function_name, *binary_two_epoc = Path(
+                                binary_two_function_file_path).name.split("__")
                             binary_two_code = self._get_code_from_decom_file(binary_two_function_file_path)
 
                             score = fuzz.ratio(binary_one_code, binary_two_code)
@@ -172,8 +177,8 @@ class differ():
                                 highest_score_name = function_two_name
                                 highest_score = score
 
-                        dict_of_function_similarities[binary_one_function_name] = {"comparison_binary_function_name": highest_score_name, "confidence": highest_score}
-
+                        dict_of_function_similarities[binary_one_function_name] = {
+                            "comparison_binary_function_name": highest_score_name, "confidence": highest_score}
 
         if args.json_output and not args.html_output:
             with open(args.json_output, 'w') as file:
@@ -181,7 +186,7 @@ class differ():
             print("Json file dumped at '{}'".format(args.json_output))
 
         elif args.html_output and not args.json_output:
-            self.create_html_output(dict_of_function_similarities,args.html_output)
+            self.create_html_output(dict_of_function_similarities, args.html_output)
             print("HTML file created at '{}'".format(args.html_output))
             webbrowser.open_new_tab(args.html_output)
 
