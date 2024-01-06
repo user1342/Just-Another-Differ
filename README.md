@@ -49,7 +49,7 @@ usage: JAD.py [-h] --binary-one BINARY_ONE --binary-two BINARY_TWO
 The below output was produced when running JAD against two differently compilled stripped versions of the 7z binary found in the [linux-static-binaries](https://github.com/polaco1782/linux-static-binaries) repository.
 
 ```bash
--b1 "\armv7l-eabihf\7zr" -b2 "\armv8-aarch64\7zr" --html-output out.html
+JAD.py -b1 "\armv7l-eabihf\7zr" -b2 "\armv8-aarch64\7zr" --html-output out.html
 ```
 
 <p align="center">
@@ -59,6 +59,28 @@ The below output was produced when running JAD against two differently compilled
 
 <div align="center">
 </div>
+
+In a similar fashion, the below is an example of using the JSON output flag:
+```bash
+JAD.py -b1 "\armv7l-eabihf\7zr" -b2 "\armv8-aarch64\7zr" --json-output out.json
+```
+
+```
+{
+    "FUN_000100f4": {
+        "binary_two_name": "thunk_FUN_2344becc",
+        "confidence": 14
+    },
+    "FUN_00010100": {
+        "binary_two_name": "thunk_FUN_0047becc",
+        "confidence": 40
+    },
+    "FUN_00010124": {
+        "binary_two_name": "thunk_FUN_98576",
+        "confidence": 41
+    },
+...
+```
 
 # 🙏 Contributions
 
