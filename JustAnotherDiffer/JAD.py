@@ -101,7 +101,7 @@ class differ():
                 <li>
                     <h2 class="function-header" onclick="toggleCodeBlock('{{ function_name }}_content')">{{ function_name }} &rarr; {{ details.binary_two_name }}</h2>
                     <div id="{{ function_name }}_content" class="content">
-                        <p>Name: {{ details.comparison_binary_function_name }}%</p>
+                        <p>Name: {{ details.comparison_binary_function_name }}</p>
                         <p>Confidence: {{ details.confidence }}%</p>
                     </div>
                 </li>
